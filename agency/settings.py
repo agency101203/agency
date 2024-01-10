@@ -190,7 +190,7 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '556392947926318',
     'API_SECRET': '4aNS89EKX40AQulEd8A8_D0bK-k',
 }
-#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Сброс пароля по E-Mail
 EMAIL_TIMEOUT = 300
