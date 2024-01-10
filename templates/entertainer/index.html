@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "entertainers" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "entertainers" %}</h2>
+{% if entertainer.count > 0 %}
+<div style="margin-top: 5px; margin-bottom: 5px">
+	<a class="btn btn-outline-success" style="width:120px" href="{% url 'entertainer_create'%}">{% trans "Add" %}</a>
+</div>
+<table id="myTable" class="table-manager" style="width:100%">
+	<thead>
+		<tr>
+			<th><p>{% trans "name" %}</p></th>
+			<!--<th></th>-->
+			<th><p></p></th>				
+		</tr>
+	</thead>
+	<tbody>
+		{% for n in entertainer %}
+		<tr>
+			<td>
+				<p>{{ n.name }}</p>						
+			</td>
+			<!--
+			<td>
+				{% if n.photo.url != None %}
+				<img style="width:100%; max-width:256px; padding:10px" src="{{ n.photo.url}}" alt="{{ n.photo.url }}">
+				{% endif %}	
+			</td>
+			-->
+			<td>
+				<p>
+				<a class="btn btn-outline-primary" style="width:120px; margin: 2px;" href="{% url 'entertainer_edit' n.id %}">{% trans "Change" %}</a> 
+				<a class="btn btn-outline-info" style="width:120px; margin: 2px;" href="{% url 'entertainer_read' n.id %}">{% trans "View" %}</a> 
+				<a class="btn btn-outline-danger" style="width:120px; margin: 2px;" onclick="return confirm('Удалить запись?')" href="{% url 'entertainer_delete' n.id %}">{% trans "Delete" %}</a>
+				</p>
+			</td>			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<a href="{% url 'entertainer_create'%}">{% trans "Add" %}</a>
+{% endif %}
+{% endblock content %}
+

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Create" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "ticket" %}</h2>
+<h2>{{ concert }}</h2>
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+	<div class="div-button-center">
+		<button type="submit" class="btn btn-outline-success" style="width:150px; margin: 2px;">{% trans "Buy ticket" %}</button>	
+		<a class="btn btn-outline-info" style="width:150px; margin: 2px;" href="{% url 'ticket_index' %}">{% trans "Back" %}</a> 	
+	</div>
+</form>
+<script type="text/javascript">
+	$(".chosen").chosen();
+</script>
+{% endblock content %}

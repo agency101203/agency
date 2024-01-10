@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Read" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "gallery" %}</h2>
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<h4>{{ gallery.title }}</h4>			
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-4">				
+					<p>{{ gallery.details | linebreaks }}</p>					
+				</div>
+				<div class="col-md-4">
+					{% if gallery.photo1.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ gallery.photo1.url}}" alt="{{ gallery.photo1.url }}">
+					{% endif %}
+				</div>
+				<div class="col-md-4">
+					{% if gallery.photo2.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ gallery.photo2.url}}" alt="{{ gallery.photo2.url }}">
+					{% endif %}
+				</div>	
+			</div>	
+			<br>
+			<div class="row">						
+				<div class="col-md-4">
+					{% if gallery.photo3.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ gallery.photo3.url}}" alt="{{ gallery.photo3.url }}">
+					{% endif %}
+				</div>
+				<div class="col-md-4">
+					{% if gallery.photo4.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ gallery.photo4.url}}" alt="{{ gallery.photo4.url }}">
+					{% endif %}
+				</div>
+				<div class="col-md-4">
+					{% if gallery.photo5.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ gallery.photo5.url}}" alt="{{ gallery.photo5.url }}">
+					{% endif %}
+				</div>
+			</div>				
+		</div>
+		<div class="card-footer">				
+			<p>{{ gallery.dateg }}</p>			
+		</div>		
+	</div>
+	<a class="btn btn-outline-info" style="width:120px; margin: 2px;" onclick="history.back()">{% trans "Back" %}</a>    	
+</div>
+
+{% endblock content %}

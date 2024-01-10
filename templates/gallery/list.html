@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "gallerys" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<div class="div-width-100-text-center">
+	<h3>{% trans "gallerys" %}</h3>
+</div>
+{% if gallery.count > 0 %}
+	<form method="POST" enctype="multipart/form-data" style="margin-top: 10px; margin-bottom: 10px;">
+		{% csrf_token %}
+		<input type="search" value="{{gallery_search}}" name="gallery_search">		
+		<button class="btn btn-outline-success" name="searchBtn" style="width:120px;">{% trans "Search" %}</button>
+		<button class="btn btn-outline-primary" name="resetBtn" type="submit" onClick="window.location.reload();" style="width:120px;">{% trans "Reset" %}</button>
+	</form>
+	{% for n in gallery %}
+		<div class="card">
+			<div class="card-header">
+				<h5>{{ n.title }}</h5>
+			</div>
+			<div class="card-body">					
+				<div class="row">
+					<div class="col-md-4">
+						<p>{{ n.details | linebreaks }}</p>
+					</div>								
+					<div class="col-md-4">
+						{% if n.photo1.url != None %}
+							<img class="light-zoom" style="width:100%; max-width:400px;" src="{{ n.photo1.url}}" alt="{{ n.photo1.url }}">
+						{% endif %}
+					</div>
+					<div class="col-md-4">
+						{% if n.photo2.url != None %}
+							<img class="light-zoom" style="width:100%; max-width:400px;" src="{{ n.photo2.url}}" alt="{{ n.photo2.url }}">
+						{% endif %}
+					</div>		
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-4">
+						{% if n.photo3.url != None %}
+							<img class="light-zoom" style="width:100%; max-width:400px;" src="{{ n.photo3.url}}" alt="{{ n.photo3.url }}">
+						{% endif %}
+					</div>
+					<div class="col-md-4">
+						{% if n.photo4.url != None %}
+							<img class="light-zoom" style="width:100%; max-width:400px;" src="{{ n.photo4.url}}" alt="{{ n.photo4.url }}">
+						{% endif %}
+					</div>
+					<div class="col-md-4">
+						{% if n.photo5.url != None %}
+							<img class="light-zoom" style="width:100%; max-width:400px;" src="{{ n.photo5.url}}" alt="{{ n.photo5.url }}">
+						{% endif %}
+					</div>
+				</div>	
+			</div>
+			<div class="card-footer text-muted">
+				<p><strong>{{ n.dateg | date:"d.m.Y H:i" }}</strong><p>
+			</div>
+		</div>
+		<hr>
+	{% endfor %}	
+{% endif %}
+{% endblock content %}
+

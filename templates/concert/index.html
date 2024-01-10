@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "concerts" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "concerts" %}</h2>
+{% if concert.count > 0 %}
+<div style="margin-top: 5px; margin-bottom: 5px">
+	<a class="btn btn-outline-success" style="width:120px" href="{% url 'concert_create'%}">{% trans "Add" %}</a>
+</div>
+<table id="myTable" class="table-manager" style="width:100%">
+	<thead>
+		<tr>
+			<th><p>{% trans "datec" %}</p></th>
+			<th><p>{% trans "entertainer" %}</p></th>
+			<th><p>{% trans "hall" %}</p></th>
+			<!--<th></th>-->
+			<th><p></p></th>				
+		</tr>
+	</thead>
+	<tbody>
+		{% for n in concert %}
+		<tr>
+			<td>
+				<p>{{ n.datec | date:"d.m.Y H:i"}}</p>
+			</td>
+			<td>
+				<p>{{ n.entertainer }}</p>						
+			</td>
+			<td>
+				<p>{{ n.hall }}</p>						
+			</td>
+			<!--
+			<td>
+				{% if n.photo.url != None %}
+				<img style="width:100%; max-width:256px; padding:10px" src="{{ n.photo.url}}" alt="{{ n.photo.url }}">
+				{% endif %}	
+			</td>
+			-->
+			<td>
+				<p>
+				<a class="btn btn-outline-primary" style="width:120px; margin: 2px;" href="{% url 'concert_edit' n.id %}">{% trans "Change" %}</a> 
+				<a class="btn btn-outline-info" style="width:120px; margin: 2px;" href="{% url 'concert_read' n.id %}">{% trans "View" %}</a> 
+				<a class="btn btn-outline-danger" style="width:120px; margin: 2px;" onclick="return confirm('Удалить запись?')" href="{% url 'concert_delete' n.id %}">{% trans "Delete" %}</a>
+				</p>
+			</td>			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<a href="{% url 'concert_create'%}">{% trans "Add" %}</a>
+{% endif %}
+{% endblock content %}
+

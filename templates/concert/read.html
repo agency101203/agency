@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Read" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "concert" %}</h2>
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<div class="row">																					
+				<div class="col-md-2">
+					{% if concert.hall.photo.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ concert.hall.photo.url}}" alt="{{ concert.hall.photo.url }}">
+					{% endif %}
+				</div>
+				<div class="col-md-10">
+					<p><strong>{{ concert.datec | date:"d.m.Y H:i" }}</strong><p>
+					<h5>{{ concert.hall }}</h5>
+				</div>	
+			</div>			
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-9">
+					<h1>{{ concert.entertainer }}</h1>
+				</div>
+				<div class="col-md-3">
+					{% if concert.entertainer.photo.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ concert.entertainer.photo.url}}" alt="{{ concert.entertainer.photo.url }}">
+					{% endif %}
+				</div>		
+			</div>				
+		</div>
+		<div class="card-footer">				
+			<p><strong>{% trans "price" %}: </strong>{{ concert.price_min | stringformat:"1.0f" }}-{{ concert.price_max | stringformat:"1.0f" }} ₽<p>		
+		</div>		
+	</div>
+	<a class="btn btn-outline-info" style="width:120px; margin: 2px;" onclick="history.back()">{% trans "Back" %}</a>    	
+</div>
+
+{% endblock content %}

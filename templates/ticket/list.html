@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "tickets" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<div class="div-width-100-text-center">
+	<h3>{% trans "tickets" %}</h3>
+</div>
+<h4>{{first_name}} {{last_name}}</h4>
+<h5>{{email}}</h5>
+{% if ticket.count > 0 %}
+	{% for n in ticket %}
+		<div class="card">
+			<div class="card-header">
+			</div>
+			<div class="card-body">					
+				<h1>{{ n.concert }}</h1>
+				<p><strong>{% trans "place" %}: </strong>{{ n.place }}<p>				
+			</div>
+			<div class="card-footer">
+				<p><strong>{% trans "price" %}: </strong>{{ n.price | stringformat:"1.0f" }} ₽<p>
+				<p><strong>{% trans "datet" %}: </strong>{{ n.datet | date:"d.m.Y H:i" }}<p>
+				<!-- <h5>{{ n.user }}</h5>							 -->
+			</div>
+		</div>
+	{% endfor %}	
+{% endif %}
+{% endblock content %}
+

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "halls" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "halls" %}</h2>
+{% if hall.count > 0 %}
+<div style="margin-top: 5px; margin-bottom: 5px">
+	<a class="btn btn-outline-success" style="width:120px" href="{% url 'hall_create'%}">{% trans "Add" %}</a>
+</div>
+<table id="myTable" class="table-manager" style="width:100%">
+	<thead>
+		<tr>
+			<th><p>{% trans "city" %}</p></th>
+			<th><p>{% trans "title" %}</p></th>
+			<th><p>{% trans "capacity" %}</p></th>
+			<!--<th></th>-->
+			<th><p></p></th>				
+		</tr>
+	</thead>
+	<tbody>
+		{% for n in hall %}
+		<tr>
+			<td>
+				<p>{{ n.city }}</p>
+			</td>
+			<td>
+				<p>{{ n.title }}</p>						
+			</td>
+			<td>
+				<p>{{ n.capacity }}</p>						
+			</td>
+			<!--
+			<td>
+				{% if n.photo.url != None %}
+				<img style="width:100%; max-width:256px; padding:10px" src="{{ n.photo.url}}" alt="{{ n.photo.url }}">
+				{% endif %}	
+			</td>
+			-->
+			<td>
+				<p>
+				<a class="btn btn-outline-primary" style="width:120px; margin: 2px;" href="{% url 'hall_edit' n.id %}">{% trans "Change" %}</a> 
+				<a class="btn btn-outline-info" style="width:120px; margin: 2px;" href="{% url 'hall_read' n.id %}">{% trans "View" %}</a> 
+				<a class="btn btn-outline-danger" style="width:120px; margin: 2px;" onclick="return confirm('Удалить запись?')" href="{% url 'hall_delete' n.id %}">{% trans "Delete" %}</a>
+				</p>
+			</td>			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<a href="{% url 'hall_create'%}">{% trans "Add" %}</a>
+{% endif %}
+{% endblock content %}
+

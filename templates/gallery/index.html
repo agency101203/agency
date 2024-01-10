@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "gallerys" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "gallerys" %}</h2>
+{% if gallery.count > 0 %}
+<div style="margin-top: 5px; margin-bottom: 5px">
+	<a class="btn btn-outline-success" style="width:120px" href="{% url 'gallery_create'%}">{% trans "Add" %}</a>
+</div>
+<table id="myTable" class="table-manager" style="width:100%">
+	<thead>
+		<tr>
+			<th><p>{% trans "dateg" %}</p></th>
+			<th><p>{% trans "title" %}</p></th>
+			<!--<th></th>-->
+			<th><p></p></th>				
+		</tr>
+	</thead>
+	<tbody>
+		{% for n in gallery %}
+		<tr>
+			<td>
+				<p>{{ n.dateg | date:"d.m.Y H:i"}}</p>
+			</td>
+			<td>
+				<p>{{ n.title }}</p>						
+			</td>
+			<!--
+			<td>
+				{% if n.photo1.url != None %}
+				<img style="width:100%; max-width:256px; padding:10px" src="{{ n.photo1.url}}" alt="{{ n.photo1.url }}">
+				{% endif %}	
+			</td>
+			-->
+			<td>
+				<p>
+				<a class="btn btn-outline-primary" style="width:120px; margin: 2px;" href="{% url 'gallery_edit' n.id %}">{% trans "Change" %}</a> 
+				<a class="btn btn-outline-info" style="width:120px; margin: 2px;" href="{% url 'gallery_read' n.id %}">{% trans "View" %}</a> 
+				<a class="btn btn-outline-danger" style="width:120px; margin: 2px;" onclick="return confirm('Удалить запись?')" href="{% url 'gallery_delete' n.id %}">{% trans "Delete" %}</a>
+				</p>
+			</td>			
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<!-- <a href="{% url 'gallery_create'%}">{% trans "Add" %}</a> -->
+{% endif %}
+{% endblock content %}
+

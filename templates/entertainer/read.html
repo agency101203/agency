@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block name %}{% trans "Read" %}{% endblock name %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "entertainer" %}</h2>
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<h4>{{ entertainer.name }}</h4>			
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-8">				
+					<p>{{ entertainer.details | linebreaks }}</p>					
+				</div>
+				<div class="col-md-4">
+					{% if entertainer.photo.url != None %}
+						<img style="width:100%; max-width:400px;" src="{{ entertainer.photo.url}}" alt="{{ entertainer.photo.url }}">
+					{% endif %}
+				</div>
+			</div>				
+		</div>
+		<div class="card-footer">				
+			<p></p>			
+		</div>		
+	</div>
+	<a class="btn btn-outline-info" style="width:120px; margin: 2px;" onclick="history.back()">{% trans "Back" %}</a>    	
+</div>
+
+{% endblock content %}

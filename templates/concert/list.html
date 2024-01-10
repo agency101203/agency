@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "concerts" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<div class="div-width-100-text-center">
+	<h3>{% trans "concerts" %}</h3>
+</div>
+{% if concert.count > 0 %}
+	<div class="row" style="margin: 10px">
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<p>{% trans "entertainer" %}</p>
+							</td>
+							<td>
+								<select name="item_entertainer" class="chosen" style="margin:5px">
+									<option value="-----">-----</option>
+									{% for entry in entertainer %}
+										{% if entry.name == selected_item_entertainer %}
+											<option value="{{ entry.name }}" selected="selected">{{ entry.name }}</option>
+										{% else %}
+											<option value="{{ entry.name }}">{{ entry.name }}</option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</td>
+						</tr>						
+						<tr>
+							<td>
+								<p>{% trans "city" %}</p>
+							</td>
+							<td>
+								<select name="item_city" class="chosen" style="margin:5px">
+									<option value="-----">-----</option>
+									{% for entry in city %}
+										{% if entry.title == selected_item_city %}
+											<option value="{{ entry.title }}" selected="selected">{{ entry.title }}</option>
+										{% else %}
+											<option value="{{ entry.title }}">{{ entry.title }}</option>
+										{% endif %}
+									{% endfor %}
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>				
+			<div class="row">
+				<button class="btn btn-outline-success" name="searchBtn" style="width:120px; margin:5px">{% trans "Search" %}</button>
+				<button class="btn btn-outline-primary" name="resetBtn" type="submit" onClick="window.location.reload();" style="width:120px; margin:5px">{% trans "Reset" %}</button>
+			</div>
+		</form>
+	</div>
+
+	<hr>
+			
+	<div class="row">
+		{% for n in concert %}
+			<div class="col-6 thumb" style="margin-top: 5px;">
+				<div class="card-header">
+					<div class="row">																					
+						<div class="col-md-2">
+							{% if n.hall.photo.url != None %}
+								<img style="width:100%; max-width:150px;" src="{{ n.hall.photo.url}}" alt="{{ n.hall.photo.url }}">
+							{% endif %}
+						</div>
+						<div class="col-md-10">
+							<p><strong>{{ n.datec | date:"d.m.Y H:i" }}</strong><p>
+							<h5>{{ n.hall }}</h5>
+						</div>	
+					</div>							
+				</div>
+				<div class="card-body">					
+					<div class="row">
+						<div class="col-md-9">
+							<h1>{{ n.entertainer }}</h1>
+						</div>
+						<div class="col-md-3">
+							{% if n.entertainer.photo.url != None %}
+								<img style="width:100%; max-width:250px;" src="{{ n.entertainer.photo.url}}" alt="{{ n.entertainer.photo.url }}">
+							{% endif %}
+						</div>									
+					</div>
+				</div>
+				<div class="card-footer">
+					<p><strong>{% trans "price" %}: </strong>{{ n.price_min | stringformat:"1.0f"}}-{{ n.price_max | stringformat:"1.0f" }} ₽<p>
+					{% if user.is_authenticated %}
+						<a class="btn btn-outline-info" style="width:150px; margin: 2px;"  href="{% url 'ticket_create' n.id %}">{% trans "Buy ticket" %}</a> 
+					{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+<!-- <table id="myTable"> -->
+	<!-- <thead> -->
+		<!-- <tr> -->
+			<!-- <th></th>				 -->
+		<!-- </tr> -->
+	<!-- </thead> -->
+	<!-- <tbody> -->
+		<!-- {% for n in concert %} -->
+		<!-- <tr> -->
+			<!-- <td> -->
+				<!-- <div class="card"> -->
+					<!-- <div class="card-header"> -->
+						<!-- <div class="row">																					 -->
+							<!-- <div class="col-md-2"> -->
+								<!-- {% if n.hall.photo.url != None %} -->
+									<!-- <img style="width:100%; max-width:400px;" src="{{ n.hall.photo.url}}" alt="{{ n.hall.photo.url }}"> -->
+								<!-- {% endif %} -->
+							<!-- </div> -->
+							<!-- <div class="col-md-10"> -->
+								<!-- <p><strong>{{ n.datec | date:"d.m.Y H:i" }}</strong><p> -->
+								<!-- <h5>{{ n.hall }}</h5> -->
+							<!-- </div>	 -->
+						<!-- </div>							 -->
+					<!-- </div> -->
+					<!-- <div class="card-body">					 -->
+						<!-- <div class="row"> -->
+							<!-- <div class="col-md-9"> -->
+								<!-- <h1>{{ n.entertainer }}</h1> -->
+							<!-- </div> -->
+							<!-- <div class="col-md-3"> -->
+								<!-- {% if n.entertainer.photo.url != None %} -->
+									<!-- <img style="width:100%; max-width:400px;" src="{{ n.entertainer.photo.url}}" alt="{{ n.entertainer.photo.url }}"> -->
+								<!-- {% endif %} -->
+							<!-- </div>									 -->
+						<!-- </div> -->
+					<!-- </div> -->
+					<!-- <div class="card-footer"> -->
+						<!-- <p><strong>{% trans "price" %}: </strong>{{ n.price_min | stringformat:"1.0f"}}-{{ n.price_max | stringformat:"1.0f" }} ₽<p> -->
+					<!-- </div> -->
+				<!-- </div> -->
+			<!-- </td>	 -->
+		<!-- </tr> -->
+		<!-- {% endfor %}	 -->
+	<!-- </tbody> -->
+<!-- </table>	 -->
+{% endif %}
+{% endblock content %}
+

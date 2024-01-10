@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% endblock title %}
+{% block header %}{% endblock header %} 
+{% block content %}
+<div class="row">
+	<div class="col-md-3">
+		<h3 align="center">{% trans "Contacts" %}</h3>
+		<h1 align="center">ТОО Man Builds</h1>
+		<address>
+			<p>ул. Казыбаева 10,<br> Алматы</p>			
+			<a href="mailto:manbuilds@mail.ru">manbuilds@mail.ru</a>			 
+		</address>						
+		<p><a href="tel:+77077818328">+7 (707) 781 83 28</a><p>
+	</div>
+	<div class="col-md-9" style="position:relative;overflow:hidden;">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2904.8347203101666!2d76.9130461902395!3d43.27583830230723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836bf874c11b65%3A0x913b258e3c94d60c!2z0YPQuy4g0JrQsNC30YvQsdCw0LXQstCwIDEwLCDQkNC70LzQsNGC0Ys!5e0!3m2!1sru!2skz!4v1702187130903!5m2!1sru!2skz" width="100%" height="500px" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+	</div>
+</div>
+{% endblock content %}

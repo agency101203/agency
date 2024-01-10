@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Read" %}{% endblock title %}
+{% block header %}{% endblock header %}
+{% block content %}
+<h2>{% trans "ticket" %}</h2>
+<div class="row justify-content-center">
+	<div class="card" style="width:100%">
+		<div class="card-header">
+			<p><strong>{{ ticket.datet | date:"d.m.Y H:i" }}</strong><p>
+			<h5>{{ ticket.user }}</h5>			
+		</div>
+		<div class="card-body">
+			<h1>{{ ticket.concert }}</h1>				
+		</div>
+		<div class="card-footer">				
+			<p><strong>{% trans "place" %}: </strong>{{ ticket.place }}<p>
+			<p><strong>{% trans "price" %}: </strong>{{ ticket.price | stringformat:"1.0f" }} ₽<p>	
+		</div>		
+	</div>
+	<a class="btn btn-outline-info" style="width:120px; margin: 2px;" onclick="history.back()">{% trans "Back" %}</a>    	
+</div>
+
+{% endblock content %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "App Name" %}{% endblock title %}
+{% block header %}
+
+{% endblock header %}
+{% block content %}
+<div class="jumbotron">
+	<div class="row justify-content-center">
+		<div class="div-width-100-text-center">
+			<h1>Концертное агентство</h1>
+		</div>
+		<div>
+			<p>Наше концертное агентство более 20 лет занимается организацией гастрольных туров, концертных выступлений, частных вечеринок, корпоративных мероприятий и рекламных акций с участием ведущих звёзд Российской и Зарубежной эстрады -  по всему миру!</p>
+			<p>Мы поможем Вам выбрать артиста исходя из Ваших пожеланий и бюджета. Предложим «горячие» даты и подготовим специальные предложения по выступлениям звёзд. Наша компания возьмет на себя решение всех задач, связанных с организацией и проведением концерта.</p> 
+			<p>Мы - команда профессионалов, которая способна организовать и провести любое мероприятие на самом высочайшем уровне!</p>
+		</div>
+	</div>	
+</div>
+
+<div class="div-width-100-text-center">
+	<h2>{% trans "concerts" %}</h2>
+</div>
+<div class="row">
+	{% if concert.count > 0 %}		
+		{% for c in concert %}
+		<div class="col-lg-3">
+			<center><p>{{ c.datec | date:"d.m.Y H:i" }}</p></center>
+			<center><h5>{{ c.hall }}</h5></center>
+			{% if c.entertainer.photo.url != None %}
+				<img class="img-center" src="{{ c.entertainer.photo.url}}" alt="{{ c.entertainer.photo.url }}">
+			{% endif %}
+			<center><h4>{{ c.entertainer.name }}</h4></center>
+		</div>
+		{% endfor %}
+	{% endif %}						
+</div>
+<h3 style="text-align: center;" ><a href="{% url 'concert_list' %}">{% trans "concerts" %}</a></h3>
+
+<div class="div-width-100-text-center">
+	<h2>{% trans "news" %}</h2>
+</div>
+<div class="row">
+	{% if news1.count > 0 %}	
+		<div class="col-lg-9 border" style="padding:10px;">
+			{% for c in news1 %}
+				<center><p><strong>{{ c.daten | date:"d.m.Y H:i" }}</strong></p></center>
+				{% if c.photo.url != None %}
+					<img class="img-center" src="{{ c.photo.url}}" alt="{{ c.photo.url }}">
+				{% endif %}
+				<h4><a href="{% url 'news_read' c.id %}">{{ c.title }}</a></h4>
+			{% endfor %}
+		</div>
+		<div class="col-lg-3 border" style="padding:10px;">
+			{% if news23.count > 0 %}
+				{% for c in news23 %}
+				<center><p><strong>{{ c.daten | date:"d.m.Y H:i" }}</strong></p></center>
+				<div class="row">
+					{% if c.photo.url != None %}
+						<img class="img-center3" src="{{ c.photo.url}}" alt="{{ c.photo.url }}">
+					{% endif %}
+				</div>
+				<div class="row">
+					<h5><a href="{% url 'news_read' c.id %}">{{ c.title }}</a></h5>
+				</div>
+				<hr class="my-4">
+				{% endfor %}
+			{% endif %}
+		</div>
+	{% endif %}
+</div>
+<h3 style="text-align: center;" ><a href="{% url 'news_list' %}">{% trans "all newss" %}</a></h3>
+
+<div class="div-width-100-text-center">
+	<h2>{% trans "entertainers" %}</h2>
+</div>
+<div class="row">
+	{% if entertainer.count > 0 %}		
+		{% for c in entertainer %}
+		<div class="col-lg-3">
+			{% if c.photo.url != None %}
+				<img class="img-center" src="{{ c.photo.url}}" alt="{{ c.photo.url }}">
+			{% endif %}
+			<center><p><strong>{{ c.name }}</strong></p></center>
+		</div>
+		{% endfor %}
+	{% endif %}						
+</div>
+<h3 style="text-align: center;" ><a href="{% url 'entertainer_list' %}">{% trans "entertainers" %}</a></h3>
+
+{% endblock content %}
+
