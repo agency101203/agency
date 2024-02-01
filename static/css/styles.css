@@ -3,25 +3,26 @@
 	/* Основные цвета */	
 	/* Основные цвета */
 	--navbar-background-color:  Black;
-	--navbar-text-color: Gold;
-	--main-background-color-light: Bisque;
-	--main-background-color-dark:  NavajoWhite;
-	--main-text-color: Maroon;
-	--main-header-color: Maroon;
-	--main-text-attention-color: Maroon;
-	--footer-background-color-light: SandyBrown;
-	--footer-background-color-dark:  Brown;
-	--footer-text-color: DarkSlateBlue;
-	--card-background-color-light: Bisque;
-	--card-background-color-dark:  NavajoWhite;
-	--card-text-color: SeaGreen;
-	--table-background-color-light: Cornsilk; 
-	--table-background-color-dark: BlanchedAlmond; 
-	--table-text-color: Maroon;	
+	--navbar-text-color: LightSteelBlue;
+	--main-background-color-light: Gainsboro;
+	--main-background-color-dark:  Silver;
+	--main-text-color: Black;
+	--main-header-color: Black;
+	--main-text-attention-color: Red;
+	--footer-background-color-light: SlateGrey;
+	--footer-background-color-dark:  Black;
+	--footer-text-color: LightSteelBlue;
+	--card-background-color-light: Snow;
+	--card-background-color-dark:  Silver;
+	--card-text-color: Black;
+	--table-background-color-light: Snow; 
+	--table-background-color-dark: LightGray; 
+	--table-text-color: Black;	
 	/* Звездочки в оценке */
 	--star-size: 30px;
 	--star-color: LightYellow;
 	--star-background: Yellow ;
+
 }
 
 /*  Навигационное меню */
